@@ -41,6 +41,31 @@ async function requestSignup(){
     });
 }
 
+async function requestLogin(){
+    const usernameLoginInput = document.getElementById("usernameLoginInput");
+    const passwordLoginInput = document.getElementById("passwordLoginInput");
+
+    fetch("/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            username: usernameLoginInput.value,
+            password: passwordLoginInput.value,
+        }),
+    }).then(response => {
+        return response.json();
+    }) .then(data => {
+        res = JSON.parse(data);
+        alert(res)
+
+        if (res[0] == 200){
+            window.location.href = "/"
+        }
+    }).catch(error => {
+        console.error('Fetch error:', error);
+    });
+}
+
 function init(){
     toggleLoginSignupContainer();
 }

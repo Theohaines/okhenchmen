@@ -1,6 +1,5 @@
 const sqlite3 = require('sqlite3');
 const path = require('path');
-const bcrypt = require("bcrypt");
 
 async function checkUserExists(username) {
     let db = new sqlite3.Database(path.resolve('db.sqlite'));
