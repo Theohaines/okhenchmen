@@ -3,6 +3,7 @@
     "start": "nodemon src/server/scripts/okhenchmen.js --ext js,html,css,json,env"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "sqlite3": "^5.1.7"

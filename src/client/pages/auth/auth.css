@@ -1,0 +1,44 @@
+.login-signup-container {
+    width: 30vw;
+    padding: 5px;
+
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    justify-content: center;
+    align-items: center;
+
+    border: 2px #381419 solid;
+}
+
+.login-signup-container input[type="text"],[type="password"]{
+    height: 30px;
+    width: 300px;
+    text-align: center;
+}
+
+.login-signup-container button{
+    height: 30px;
+    width: 300px;
+    text-align: center;
+}
+
+.login-signup-container select{
+    height: 30px;
+    width: 300px;
+    text-align: center;
+}
+
+.login-signup-form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkbox-text-combo {
+    display: flex;
+    flex-direction: row;
+    column-gap: 5px;
+}

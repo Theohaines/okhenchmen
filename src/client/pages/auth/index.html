@@ -1,0 +1,59 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OkHenchmen - Login / Signup</title>
+
+    <link rel="stylesheet" href="/styles/global.css">
+    <link rel="stylesheet" href="/auth/auth.css">
+</head>
+<body>
+    <div class="nav-bar">
+        <img src="/media/logo.png" alt="">
+        <div class="nav-links">
+            <a href="">Browse</a>
+            <a href="">My profile</a>
+        </div>
+    </div>
+
+    <div class="login-signup-container">
+        <div class="login-signup-form" id="loginContainer">
+            <h2>Login</h2>
+            <label for="usernameLoginInput">Username</label>
+            <input name="usernameLoginInput" id="usernameLoginInput" placeholder="username" type="text">
+            <label for="passwordLoginInput">Password</label>
+            <input name="passwordLoginInput" id="passwordLoginInput" placeholder="password" type="password">
+
+            <button>Login</button>
+            <button onclick="toggleLoginSignupContainer()">I don't have an account</button>
+        </div>
+
+        <div class="login-signup-form" id="signupContainer">
+            <h2>Signup</h2>
+            <label for="usernameSignupInput">Username</label>
+            <input name="usernameSignupInput" id="usernameSignupInput" placeholder="username" type="text">
+            <label for="typeSignupInput">Profile type</label>
+            <select name="typeSignupInput" id="typeSignupInput">
+                <option value="Leader">Leader</option>
+                <option value="Henchmen">Henchmen</option>
+            </select>
+            <label for="passwordSignupInput">Password</label>
+            <input name="passwordSignupInput" id="passwordSignupInput" placeholder="password" type="password">
+            <label for="confirmPasswordSignupInput">Confirm password</label>
+            <input name="confirmPasswordSignupInput" id="confirmPasswordSignupInput" placeholder="confirm password" type="password">
+
+            <div class="checkbox-text-combo">
+                <input type="checkbox">
+                <p>By ticking the box you agree to the <a href="">Privacy Policy & TOS</a>.</p>
+            </div>
+
+            <div class="g-recaptcha" data-sitekey="6LcaKqMqAAAAALgaNKX_WKs6aOvpU-cosrvVtp6E"></div>
+
+            <button onclick="requestSignup()">Signup</button>
+            <button onclick="toggleLoginSignupContainer()">I already have an account</button>
+        </div>
+    </div>
+</body>
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script src="/scripts/auth.js"></script>
+</html>
