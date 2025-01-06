@@ -35,6 +35,8 @@ body {
     justify-content: center;
     align-items: center;
     column-gap: 10px;
+
+    width: 100vw;
 }
 
 .nav-bar .nav-links a {

@@ -15,8 +15,11 @@ app.use(
     }),
 );
 
+const globaljs = require('./global');
 const signupvalidation = require('../scripts/auth/signupvalidation');
 const loginvalidation = require('../scripts/auth/loginvalidation');
+const createprofile = require('../scripts/profile/createprofile');
+const loadprofile = require('../scripts/profile/loadprofile');
 
 const requireAuth = (req, res, next) => {
     if (req.session.auth) {
@@ -30,8 +33,9 @@ app.use('/scripts', express.static(path.resolve('src/client/scripts')));
 app.use('/styles', express.static(path.resolve('src/client/styles')));
 app.use('/media', express.static(path.resolve('src/client/media')));
 
-app.use('/landing', express.static(path.resolve('src/client/pages/landing')));
+app.use('/landing', requireAuth, express.static(path.resolve('src/client/pages/landing')));
 app.use('/auth', express.static(path.resolve('src/client/pages/auth')));
+app.use('/myprofile', requireAuth, express.static(path.resolve('src/client/pages/myprofile')));
 
 app.get('/', requireAuth, (req, res) => {
     res.status(200).sendFile(path.resolve('src/client/pages/landing/index.html'));
@@ -39,6 +43,10 @@ app.get('/', requireAuth, (req, res) => {
 
 app.get('/auth', (req, res) => {
     res.status(200).sendFile(path.resolve('src/client/pages/auth/index.html'));
+});
+
+app.get('/myprofile', requireAuth, (req, res) => {
+    res.status(200).sendFile(path.resolve('src/client/pages/myprofile/index.html'));
 });
 
 app.listen(process.env.PORT, () => {
@@ -80,6 +88,27 @@ app.use('/login', async (req, res) => {
     if (response[0] == 200){
         req.session.auth = req.body.username;
     }
+
+    res.status(response[0]).json(JSON.stringify(response));
+})
+
+app.use('/checkfts', requireAuth, async (req, res) => {
+    let response = await globaljs.checkFTS(req.session.auth);
+    res.status(response[0]).json(JSON.stringify(response));
+})
+
+app.use('/getprofile', requireAuth, async (req, res) => {
+    let profileExists = await globaljs.checkProfileExists(req.session.auth);
+
+    if (profileExists[0] == 404){ //Generate a blank profile for the user
+        let profilevalidated = await createprofile.createprofile(req.session.auth);
+
+        if (profilevalidated[0] != 200){
+            return res.status(profilevalidated[0]).json(JSON.stringify(profilevalidated));
+        }
+    }
+
+    let response = await loadprofile.loadprofile(req.session.auth);
 
     res.status(response[0]).json(JSON.stringify(response));
 })
